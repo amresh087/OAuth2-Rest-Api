@@ -26,6 +26,8 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import com.amresh.oauth2.service.MyUserDetailsService;
 
+
+
 @Configuration
 @EnableAuthorizationServer
 public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -35,11 +37,13 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
 	@Autowired
 	MyUserDetailsService userDetailsService;
-	@Value("classpath:schema.sql")
+	
+	
+	/*@Value("classpath:schema.sql")
 	private Resource schemaScript;
 
 	@Value("classpath:data.sql")
-	private Resource dataScript;
+	private Resource dataScript;*/
 
 	@Override
 	public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
@@ -74,16 +78,16 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 	public DataSourceInitializer dataSourceInitializer(final DataSource dataSource) {
 		final DataSourceInitializer initializer = new DataSourceInitializer();
 		initializer.setDataSource(dataSource);
-		initializer.setDatabasePopulator(databasePopulator());
+		//initializer.setDatabasePopulator(databasePopulator());
 		return initializer;
 	}
 
-	public DatabasePopulator databasePopulator() {
+	/*public DatabasePopulator databasePopulator() {
 		final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(schemaScript);
 		populator.addScript(dataScript);
 		return populator;
-	}
+	}*/
 
 	@Bean
 	@Primary
